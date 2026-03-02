@@ -1,72 +1,186 @@
-# STUDENTSREPO
- 
-[Una frase corta que resuma el propósito – máximo 15 palabras]
-“Donde las ideas académicas se convierten en conocimiento compartido.”
+# Repositorio Estudiantil - Grupo 7
+
+API REST para gestionar proyectos académicos institucionales.
+
+---
 
 ## Introducción / Contexto
 
-1. Descripción del problema
+En muchas instituciones educativas, los proyectos académicos desarrollados por los estudiantes no cuentan con un sistema centralizado que permita su organización, consulta y gestión estructurada.
 
-Actualmente, muchos proyectos académicos realizados por estudiantes quedan almacenados de manera aislada (en computadores personales, correos o plataformas cerradas), lo que dificulta su consulta, reutilización y retroalimentación.
+Actualmente, estos trabajos pueden quedar almacenados de manera dispersa, dificultando su acceso y reutilización académica.
 
-Esto genera:
+Este proyecto busca resolver ese problema mediante el desarrollo de una API backend que permita gestionar estudiantes y sus proyectos académicos dentro de un repositorio estructurado.
 
--Pérdida de conocimiento valioso.
+La relevancia del proyecto radica en su impacto académico, ya que facilita la organización del conocimiento institucional y promueve la consulta de trabajos previos como referencia para futuros estudiantes.
 
--Baja visibilidad del trabajo estudiantil.
+El dominio del proyecto corresponde a un sistema académico institucional enfocado en la gestión de proyectos estudiantiles.
 
--Escasa colaboración entre estudiantes y docentes.
-
--Repetición de ideas o proyectos similares por falta de acceso a antecedentes.
-
-
-2. Justificación: ¿por qué es relevante? (impacto social, académico, empresarial, etc.)  
-3. Breve descripción del dominio / temática del proyecto integrador
+---
 
 ## Objetivos
 
-**Objetivo General**  
-[Redactar el objetivo general del proyecto integrador – una frase clara y concreta]
+### Objetivo General
 
-**Objetivos Específicos**  
-- [OE1 – descripción clara]  
-- [OE2 – descripción clara]  
-- [OE3 – descripción clara]  
-- [OE4 – descripción clara]  
-(Mínimo 3–5 objetivos específicos)
+Desarrollar una API REST con Spring Boot para gestionar estudiantes y sus proyectos académicos en un repositorio institucional.
+
+### Objetivos Específicos
+
+- Diseñar el modelo de dominio estableciendo la relación entre Estudiante y Proyecto.
+- Implementar entidades persistentes utilizando anotaciones JPA.
+- Configurar la estructura del proyecto bajo arquitectura por capas.
+- Preparar la conexión a base de datos relacional.
+- Documentar técnicamente el proyecto conforme a las directrices del curso Backend 2.
+
+---
 
 ## Alcance del Proyecto (Scope)
 
-**Qué se va a desarrollar:**  
-- [Listar módulos principales y funcionalidades clave previstas en el semestre]
+### Qué se va a desarrollar
 
-**Qué NO se va a desarrollar en esta versión (fuera de alcance):**  
-- [Listar explícitamente lo que se excluye intencionalmente]
+- Modelo de dominio con entidades Estudiante y Proyecto.
+- Relación 1:N entre estudiante y proyectos.
+- Persistencia con Spring Data JPA.
+- Servicios para lógica de negocio.
+- Controladores REST.
+- Validaciones básicas.
+- Documentación de API.
+- Pruebas unitarias.
+
+### Qué NO se va a desarrollar en esta versión
+
+- Sistema completo de autenticación con JWT.
+- Interfaz frontend final productiva.
+- Integración con sistemas institucionales reales.
+- Despliegue en entorno de producción.
+- Microservicios o arquitectura distribuida.
+
+---
 
 ## Tecnologías y Herramientas (Tech Stack)
 
-- **Backend**: Spring Boot [versión exacta], Java [17 o 21], Spring Data JPA, [PostgreSQL / MySQL / H2]  
-- **Frontend**: [tecnología elegida – React / Angular / Vue / etc.]  
-- **Base de datos**: [PostgreSQL en producción / H2 en desarrollo inicial / etc.]  
-- **Otras herramientas**: Git, GitHub, [Docker si se usará más adelante], [Postman / Swagger], etc.
+- **Backend**: Spring Boot 3.5.11, Java 21, Spring Data JPA  
+- **Base de datos**: PostgreSQL (configurable), modelado en DBeaver  
+- **Modelado conceptual**: Prisma (para definición estructural del dominio)  
+- **ORM en el proyecto**: JPA (anotaciones en entidades)  
+- **Control de versiones**: Git y GitHub  
+- **Herramientas adicionales**: Maven, Lombok  
+
+---
 
 ## Integrantes del Equipo
 
-| Nombre                  | Rol principal              | Usuario GitHub     |
-|-------------------------|----------------------------|--------------------|
-| [Nombre 1]              | Líder / Backend            | @[usuario]         |
-| [Nombre 2]              | Frontend Lead              | @[usuario]         |
-| [Nombre 3]              | Backend / Base de datos    | @[usuario]         |
-| [Nombre 4]              | [rol]                      | @[usuario]         |
-| ...                     | ...                        | ...                |
+| Nombre               | Rol principal               | Usuario GitHub        |
+|----------------------|-----------------------------|---------------------- |
+| Mariana              | Backend / Modelado BD       | @[Mariana20209]       |
+| Santiago             | Backend                     | @[SantiagoCalderon11] |
+| Viadis               | Documentación / Soporte     | @[vcorreaga]          |
+
+
 
 ## Diagrama de Clases del Dominio (v1)
 
-![Diagrama de Dominio v1](docs/diagrama-dominio-v1.png)  
-*Diagrama inicial del modelo de dominio – versión 1. Se actualizará en futuras entregas.*
+![Diagrama de Dominio v1](docs/diagrama-dominio-v1.png)
 
-## Instrucciones de Instalación y Ejecución (para desarrolladores)
+Diagrama inicial del modelo de dominio – versión 1.  
+Incluye las entidades:
 
-1. Clonar el repositorio
-   ```bash
-   git clone https://github.com/[usuario-lider]/[nombre-repo].git
+- Estudiante
+- Proyecto
+
+Relación principal:  
+Un Estudiante puede tener múltiples Proyectos (1:N).
+
+---
+
+## Modelo del Dominio Implementado
+
+### Entidad Estudiante
+
+- id (Long)
+- nombre
+- email (único)
+- carrera
+- semestre
+- universidad
+- createdAt
+- updatedAt
+
+Relación:
+
+```java
+@OneToMany(mappedBy = "estudiante")
+private List<Proyecto> proyectos;
+Entidad Proyecto
+
+id (Long)
+
+titulo
+
+descripcion
+
+area
+
+fechaEntrega
+
+createdAt
+
+updatedAt
+
+Relación:
+
+@ManyToOne
+@JoinColumn(name = "estudiante_id", nullable = false)
+private Estudiante estudiante;
+
+
+#Estructura del Proyecto
+
+
+## Estructura del Proyecto
+
+```text
+repositorio-estudiantil-grupo-7/
+├── .mvn/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── grupo7/
+│   │   │           └── repositorioestudiantil/
+│   │   │               ├── config/
+│   │   │               │   └── .gitkeep
+│   │   │               ├── controller/
+│   │   │               │   └── .gitkeep
+│   │   │               ├── exception/
+│   │   │               │   └── .gitkeep
+│   │   │               ├── model/
+│   │   │               │   ├── dto/
+│   │   │               │   │   └── .gitkeep
+│   │   │               │   └── entity/
+│   │   │               │       ├── Estudiante.java
+│   │   │               │       └── Proyecto.java
+│   │   │               ├── repository/
+│   │   │               │   └── EstudianteRepository.java
+│   │   │               ├── service/
+│   │   │               │   └── .gitkeep
+│   │   │               └── RepositorioestudiantilApplication.java
+│   │   └── resources/
+│   │       ├── application.properties
+│   │       └── application-dev.properties
+│   └── test/
+│       └── java/
+│           └── com/
+│               └── grupo7/
+│                   └── repositorioestudiantil/
+│                       └── RepositorioestudiantilApplicationTests.java
+├── target/
+├── .gitattributes
+├── .gitignore
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── README.md
+└── docs/
+    └── diagrama-dominio-v1.png
+    
