@@ -194,7 +194,7 @@ git clone https://github.com/Mariana20209/repositorio-estudiantil-grupo-7.git
 2. Ingresar al proyecto
 cd repositorio-estudiantil-grupo-7
 
-3.Configuarar base de datos
+3.Configurar base de datos
 src/main/resources/application.properties
 spring.datasource.url=jdbc:postgresql://db.prisma.io:5432/postgres?sslmode=require
 spring.datasource.username=d829c1d01055aa0acd156d59ff8d59382898f7bd3c83d31cba9ae443cda37c61
@@ -208,6 +208,6 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 4. Ejecutar la aplicación
 .\mvnw.cmd spring-boot:run
 
-4. Acceder a la API en:
+5. Acceder a la API en:
 
 http://localhost:8080
